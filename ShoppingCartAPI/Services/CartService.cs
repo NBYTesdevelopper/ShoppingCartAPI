@@ -1,5 +1,6 @@
 ﻿using ShoppingCartAPI.Dto;
 using ShoppingCartAPI.Exceptions;
+using ShoppingCartAPI.Interfaces;
 using ShoppingCartAPI.Models;
 using ShoppingCartAPI.Repositories;
 
@@ -7,10 +8,10 @@ namespace ShoppingCartAPI.Services
 {
     public class CartService
     {
-        private readonly CartRepository _cartRepository;
-        private readonly ProductRepository _productRepository;
+        private readonly ICartRepository _cartRepository;
+        private readonly IProductRepository _productRepository;
 
-        public CartService(CartRepository repo, ProductRepository productRepo)
+        public CartService(ICartRepository repo, IProductRepository productRepo)
         {
             _cartRepository = repo;
             _productRepository = productRepo;

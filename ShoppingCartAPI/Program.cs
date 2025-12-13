@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ShoppingCartAPI;
 using ShoppingCartAPI.Context;
+using ShoppingCartAPI.Interfaces;
 using ShoppingCartAPI.Middleware;
 using ShoppingCartAPI.Repositories;
 using ShoppingCartAPI.Services;
@@ -53,12 +54,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 // -----------------------------
-// REPOSITORIES
+// REPOSITORIES : interface + concrete mapping
 // -----------------------------
-builder.Services.AddScoped<CustomerRepository>();
-builder.Services.AddScoped<ProductRepository>();
-builder.Services.AddScoped<CartRepository>();
-builder.Services.AddScoped<PurchaseHistoryRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IPurchaseHistoryRepository, PurchaseHistoryRepository>();
+
 
 // -----------------------------
 // SERVICES

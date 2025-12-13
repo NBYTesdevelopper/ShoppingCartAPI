@@ -5,6 +5,7 @@ using Azure;
 using Microsoft.IdentityModel.Tokens;
 using ShoppingCartAPI.Dto;
 using ShoppingCartAPI.Exceptions;
+using ShoppingCartAPI.Interfaces;
 using ShoppingCartAPI.Models;
 using ShoppingCartAPI.Repositories;
 
@@ -13,9 +14,9 @@ namespace ShoppingCartAPI.Services
     public class JwtService
     {
         private readonly IConfiguration _config;
-        private readonly CustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public JwtService(IConfiguration config, CustomerRepository repo)
+        public JwtService(IConfiguration config, ICustomerRepository repo)
         {
             _config = config;
             _customerRepository = repo;

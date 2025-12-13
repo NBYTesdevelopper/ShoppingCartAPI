@@ -1,6 +1,7 @@
 ﻿using Azure;
 using ShoppingCartAPI.Dto;
 using ShoppingCartAPI.Exceptions;
+using ShoppingCartAPI.Interfaces;
 using ShoppingCartAPI.Models;
 using ShoppingCartAPI.Repositories;
 
@@ -8,9 +9,9 @@ namespace ShoppingCartAPI.Services
 {
     public class CustomerService
     {
-        private readonly CustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerService(CustomerRepository repo)
+        public CustomerService(ICustomerRepository repo)
         {
             _customerRepository = repo;
         }
