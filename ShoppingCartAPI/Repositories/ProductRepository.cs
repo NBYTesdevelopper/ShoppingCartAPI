@@ -2,10 +2,11 @@
 using ShoppingCartAPI.Models;
 using ShoppingCartAPI.Context;
 using Microsoft.EntityFrameworkCore;
+using ShoppingCartAPI.Interfaces;
 
 namespace ShoppingCartAPI.Repositories
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext _context;
 

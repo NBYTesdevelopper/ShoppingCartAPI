@@ -1,4 +1,5 @@
 ﻿using ShoppingCartAPI.Exceptions;
+using ShoppingCartAPI.Interfaces;
 using ShoppingCartAPI.Models;
 using ShoppingCartAPI.Repositories;
 
@@ -6,16 +7,16 @@ namespace ShoppingCartAPI.Services
 {
     public class PaymentService
     {
-        private readonly CartRepository _cartRepository;
-        private readonly PurchaseHistoryRepository _historyRepository;
-        private readonly CustomerRepository _customerRepository;
-        private readonly ProductRepository _productRepository;
+        private readonly ICartRepository _cartRepository;
+        private readonly IPurchaseHistoryRepository _historyRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IProductRepository _productRepository;
 
         public PaymentService(
-            CartRepository cartRepo,
-            PurchaseHistoryRepository historyRepo,
-            CustomerRepository customerRepo,
-            ProductRepository productRepo)
+            ICartRepository cartRepo,
+            IPurchaseHistoryRepository historyRepo,
+            ICustomerRepository customerRepo,
+            IProductRepository productRepo)
         {
             _cartRepository = cartRepo;
             _historyRepository = historyRepo;

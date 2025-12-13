@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingCartAPI.Dto;
+using ShoppingCartAPI.Interfaces;
 using ShoppingCartAPI.Models;
 using ShoppingCartAPI.Repositories;
 
@@ -7,9 +8,9 @@ namespace ShoppingCartAPI.Services
 {
     public class ProductService
     {
-        private readonly ProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ProductService(ProductRepository repo)
+        public ProductService(IProductRepository repo)
         {
             _productRepository = repo;
         }
