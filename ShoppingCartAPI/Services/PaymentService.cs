@@ -38,20 +38,26 @@ namespace ShoppingCartAPI.Services
             if (customer == null)
                 throw new CustomerNotFoundException(customerId);
 
-            if (customer.Budget < total)
+            // 🔴 COMPOUND DECISION (MCDC burada!)
+            if (customer.Budget < total && total > 0)
                 throw new InsufficientBudgetException(total, customer.Budget);
 
             var insufficientProducts = cartItems
                 .Where(ci => ci.Product.Stock < ci.Quantity)
                 .ToList();
 
-            if (insufficientProducts.Any())
+            // 🔴 COMPOUND DECISION (istersen bonus)
+            if (insufficientProducts.Any() && cartItems.Count > 0)
                 throw new InsufficientStockException(insufficientProducts);
 
             // Payment
             decimal newBudget = customer.Budget - total;
             await _customerRepository.UpdateBudgetAsync(newBudget, customer);
 
+            foreach (var cartItem in cartItems)
+            {
+                cartItem.Product.Stock -= cartItem.Quantity;
+            }
             // Update product stock
             await _productRepository.UpdateProductStock(cartItems);
 

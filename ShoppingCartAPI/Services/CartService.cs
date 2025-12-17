@@ -23,7 +23,7 @@ namespace ShoppingCartAPI.Services
             var product = await _productRepository.GetProductByIdAsync(dto.ProductId);
             if (product == null)
                 throw new ProductNotFoundException(dto.ProductId);
-            if (product.Stock <= 0)
+            if (product.Stock <= 0 && dto.Quantity > 0)
                 throw new InvalidQuantityException("Product is out of stock.");
             if (dto.Quantity <= 0)
                 throw new InvalidQuantityException("Quantity must be positive.");
@@ -49,7 +49,7 @@ namespace ShoppingCartAPI.Services
             if (cartItem == null)
                 throw new CartItemNotFoundException(cartItemId);
 
-            if (cartItem.CustomerId != customerId)
+            if (cartItem.CustomerId != customerId && customerId > 0)
                 throw new UnauthorizedCartAccessException();
 
             if (quantity <= 0)
