@@ -58,10 +58,7 @@ namespace ShoppingCartAPI.Repositories
         // 2.6 Update Product Stocks
         public async Task<bool> UpdateProductStock(List<Cart> cartItems) 
         {
-            foreach (var cartItem in cartItems)
-            {
-                cartItem.Product.Stock -= cartItem.Quantity;
-            }
+
             await _context.SaveChangesAsync();
             return true;
         }
